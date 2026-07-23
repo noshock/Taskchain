@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskChain</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="header">
+
+        <div class="header-left">
+            <h1>TaskChain</h1>
+        </div>
+
+        <button id="connectBtn">
+            Connect Wallet
+        </button>
+
+    </header>
+
+
+    <section class="wallet-card">
+
+        <div class="wallet-info">
+
+            <h3>Wallet</h3>
+
+            <p id="walletAddress">
+                Not Connected
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="add-task">
+
+        <h3>Add New Task</h3>
+
+        <div class="task-input">
+
+            <input
+                type="text"
+                id="taskInput"
+                placeholder="Enter task..."
+                disabled
+            >
+
+            <button
+                id="addBtn"
+                disabled>
+                Add
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section class="tasks">
+
+        <div class="task-header">
+
+            <h3>Your Tasks</h3>
+
+            <div class="task-counter">
+
+              
+
+                <strong id="taskCount">0</strong>
+
+            </div>
+
+        </div>
+
+        <ul id="taskList">
+
+        </ul>
+
+    </section>
+
+</div>
+
+<div id="toast"></div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
