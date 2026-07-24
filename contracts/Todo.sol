@@ -55,6 +55,12 @@ contract Todo {
         );
     }
 
+    function editTask(uint256 _id, string memory _newContent) public {
+      require(_id < privateTask[msg.sender].length, "Task does not exist");
+
+      privateTask[msg.sender][_id].content = _newContent;
+    }
+
     function deleteTask(uint _id) public {
         require(_id < privateTask[msg.sender].length, "task does not exist");
         uint lastIndex = privateTask[msg.sender].length - 1;

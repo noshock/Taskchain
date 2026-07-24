@@ -116,11 +116,11 @@ li{
     background:#151716;
     border:1px solid var(--border);
     border-radius:12px;
-    padding:15px;
-    margin-bottom:12px;
+    padding:16px;
+    margin-bottom:15px;
     display:flex;
-    justify-content:space-between;
-    align-items:center;
+    flex-direction:column;
+    gap:15px;
     transition:.25s;
 }
 
@@ -133,40 +133,70 @@ li span{
     flex:1;
     color:var(--text);
     font-size:15px;
-    margin-right:12px;
+    word-break:break-word;
 }
+
+.completed-task{
+    text-decoration:line-through;
+    color:var(--text-secondary);
+    opacity:.75;
+    transition:.3s;
+}
+
+.action-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.complete,
+.edit,
+.delete{
+    min-width:90px;
+    padding:8px 14px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    transition:all .25s ease;
+}
+
+/* Complete Button */
 
 .complete{
     background:var(--primary);
     color:#151716;
-    border:none;
-    padding:8px 14px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.3s;
-    margin-right:8px;
 }
 
 .complete:hover{
-    transform:translateY(-3px);
+    transform:translateY(-2px);
     box-shadow:0 0 15px rgba(200,245,74,.35);
 }
+
+/* Edit Button */
+
+.edit{
+    background:#f59e0b;
+    color:#fff;
+}
+
+.edit:hover{
+    background:#d97706;
+    transform:translateY(-2px);
+}
+
+/* Delete Button */
 
 .delete{
     background:#dc2626;
     color:#fff;
-    border:none;
-    padding:8px 14px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.3s;
 }
 
 .delete:hover{
     background:#ef4444;
-    transform:translateY(-3px);
+    transform:translateY(-2px);
 }
 
 @media(max-width:600px){
@@ -191,13 +221,18 @@ li span{
     li{
         flex-direction:column;
         align-items:flex-start;
+    }
+
+    .action-buttons{
+        width:100%;
+        flex-direction:column;
         gap:10px;
     }
 
     .complete,
+    .edit,
     .delete{
         width:100%;
-        margin-right:0;
     }
 }
 
@@ -235,6 +270,7 @@ li span{
     vertical-align:middle;
 }
 
+
 @keyframes spin{
     from{
         transform:rotate(0deg);
@@ -242,4 +278,15 @@ li span{
     to{
         transform:rotate(360deg);
     }
+}
+
+.task-content{
+    width:100%;
+}
+
+.task-content span{
+    display:block;
+    font-size:16px;
+    line-height:1.6;
+    word-break:break-word;
 }

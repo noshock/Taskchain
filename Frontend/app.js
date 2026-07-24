@@ -1,6 +1,6 @@
 console.log("app.js loaded");
 
-const CONTRACT_ADDRESS = "0x0Ec2f62eD256b08A4d07a4B4BB0E113d2868127A";
+const CONTRACT_ADDRESS = "0xA45CAF4a2dbf47738f4063eEd5060e4EE5000Da2";
 
 const ABI = [
   {
@@ -140,7 +140,26 @@ const ABI = [
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+         "internalType": "uint256",
+         "name": "_id",
+         "type": "uint256"
+        },
+      {
+         "internalType": "string",
+         "name": "_newContent",
+         "type": "string"
+      }
+     ],
+         "name": "editTask",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
     }
+
 ];
 
 const connectBtn = document.getElementById("connectBtn");
@@ -257,20 +276,48 @@ async function loadTasks() {
     tasks.forEach((task) => {
       const li = document.createElement("li");
       li.innerHTML = `
-      <span>${task.content}</span>
-      <button class="complete">
-       ${task.completed ? "Undo" : "Complete"}
-      </button>
-      <button class="delete">Delete</button>
-      `;
+      <div class="tasl-content">
+      <span class="${task.completed ? "completed-task" : ""}">
+          ${task.completed ? " ✔ " : ""}${task.content}
+      </span>
+    </div>
+
+    <div class="action-buttons">
+     <button class="complete">
+         ${task.completed ? "Undo" : "Complete"}
+     </button>
+
+     <button class="edit">Edit</button>
+
+     <button class="delete">Delete</button>
+    </div>
+ `;
+    
+    
       const completeBtn = li.querySelector(".complete");
+      const editBtn = li.querySelector(".edit");
       const deleteBtn = li.querySelector(".delete");
+
+
       completeBtn.addEventListener("click", async () => {
 
         const tx = await contract.toggleTask(task.id);
         await tx.wait();
         await loadTasks();
 
+      });
+
+      editBtn.addEventListener("click", async () => {
+
+        const newContent = prompt("Edit your task:", task.content);
+
+        if (newContent === null || newContent.trim() === "") {
+          return;
+        }
+
+        const tx = await contract.editTask(task.id.toNumber(), newContent);
+        await tx.wait;
+        await loadTasks();
       });
 
       deleteBtn.addEventListener("click", async () => {
